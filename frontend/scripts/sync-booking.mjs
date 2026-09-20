@@ -22,6 +22,7 @@ const manifestPath = path.join(here, 'booking-mirror.json')
 // Paths relative to frontend/src in BOTH repos.
 export const MIRRORED = [
   'pages/BookNow.jsx',
+  'pages/PaymentSuccess.jsx',
   'components/DateTimePicker.jsx',
   'components/GoogleAddressInput.jsx',
   'components/TrustBadges.jsx',

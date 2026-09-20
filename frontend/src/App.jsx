@@ -6,7 +6,7 @@ import BookNow from './pages/BookNow'
 import { Toaster } from './components/ui/sonner'
 import About from './components/pages/About'
 import Contact from './components/pages/Contact'
-import PaymentSuccess from './components/pages/PaymentSuccess'
+import PaymentSuccess from './pages/PaymentSuccess'
 import Terms from './components/pages/Terms'
 import Privacy from './components/pages/Privacy'
 import NotFound from './components/pages/NotFound'
@@ -39,7 +39,6 @@ export default function App() {
         <Route path="payment/success" element={<PaymentSuccess />} />
         <Route path="payment-success" element={<PaymentSuccess />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="payment/success" element={<PaymentSuccess />} />
         <Route path="terms-and-conditions" element={<Terms />} />
         <Route path="privacy-policy" element={<Privacy />} />
 
