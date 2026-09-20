@@ -9,17 +9,22 @@ shared admin, shared Stripe). The booking page under `src/pages/BookNow.jsx`
 and its components are copied **verbatim** from the bookaride.co.nz repo —
 never edit them here (see "Booking page mirror" below).
 
-## Standing workflow rules (owner-approved)
+## Shipping rule — ALWAYS PUSH & MERGE (owner rule, 2026-09-20)
 
-1. **Ship green, ship current.** When work is complete and the build passes,
-   push it and merge the PR immediately — do not leave approved work sitting
-   in draft PRs or unmerged branches. The deployed system should always match
-   the latest build.
-2. **Keep `main` current.** Push work to `main` (or sync `main` with the
-   working branch after every push) so Vercel production always deploys the
-   latest state.
-3. **Verify before merge**: `cd frontend && npm run build` must pass with
-   zero errors.
+Production must always match the latest build. Work is **not finished** until
+it is merged to `main` **and** pushed to the production branch (see Deploy).
+In the same session, every time:
+
+1. Branch → commit → push → open PR → squash-merge → delete the branch. Never
+   stop at "want me to open a PR?" and never leave approved work in a draft
+   PR or an unmerged branch.
+2. **Verify before merge**: `cd frontend && npm run build` must pass with
+   zero errors (this includes the booking-mirror drift check).
+3. If `main` has moved, merge it into the branch and resolve conflicts, then
+   merge — never leave the branch behind `main`.
+4. After merging, push `main` to the production branch
+   (`git push origin main:claude/original-website-design-i7xdfz`), confirm the
+   deploy went live, and report the merge commit SHA.
 
 ## Booking page mirror — NO DRIFT (owner rule)
 
