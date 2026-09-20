@@ -5,8 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/sync-booking.mjs check",
     "build": "vite build && node scripts/prerender.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "sync:booking": "node scripts/sync-booking.mjs sync",
+    "check:booking": "node scripts/sync-booking.mjs check"
   },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.12",

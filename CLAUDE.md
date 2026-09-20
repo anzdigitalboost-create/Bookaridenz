@@ -7,7 +7,7 @@ there is **no backend here**. All `/api/*` requests are proxied by
 `vercel.json` to the live bookaride.co.nz platform (shared Neon database,
 shared admin, shared Stripe). The booking page under `src/pages/BookNow.jsx`
 and its components are copied **verbatim** from the bookaride.co.nz repo —
-prefer re-syncing from that repo over rewriting them.
+never edit them here (see "Booking page mirror" below).
 
 ## Standing workflow rules (owner-approved)
 
@@ -20,6 +20,24 @@ prefer re-syncing from that repo over rewriting them.
    latest state.
 3. **Verify before merge**: `cd frontend && npm run build` must pass with
    zero errors.
+
+## Booking page mirror — NO DRIFT (owner rule)
+
+The booking system is shared with bookaride.co.nz and must be **identical**
+on both sites. `frontend/scripts/sync-booking.mjs` holds the list of mirrored
+files (BookNow page, DateTimePicker, GoogleAddressInput, TrustBadges,
+LoadingSpinner, analytics lib, api config, and the shadcn ui primitives the
+page imports) and `frontend/scripts/booking-mirror.json` records the source
+commit plus a hash per file.
+
+- `npm run check:booking` runs automatically before every build and **fails
+  the build** if any mirrored file differs from the manifest.
+- To change anything on the booking page: make the change in the
+  bookaride.co.nz repo (`Book-A-Ride-Gap-Digital/BookARide`), merge it there,
+  then in this repo run `cd frontend && npm run sync:booking -- <path-to-BookARide>`
+  (defaults to a sibling `../BookARide` checkout, or set `BOOKARIDE_SRC`),
+  commit the synced files + manifest, and ship.
+- Never "fix" a drift failure by editing the mirrored files on this side.
 
 ## Business rules
 
